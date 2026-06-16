@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinancePro — Premium Personal Wealth & Budget Management</title>
+    <!-- Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --gold: #FFD700;
+            --gold-hover: #d4af37;
+            --input-bg: rgba(255, 255, 255, 0.05);
+            --text-main: #FFFFFF;
+            --text-dim: #B0B0B0;
+            --card-border: rgba(255, 215, 0, 0.15);
+            --emerald: #22c55e;
+            --rose: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: radial-gradient(circle at top right, #1a1f26, #000000);
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: #e5e5e5;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(45deg,  rgba(255,215,0,0.02) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,215,0,0.02) 25%, transparent 25%);
+            background-size: 60px 60px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Header / Navigation ── */
+        header {
+            border-b: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(10, 10, 10, 0.7);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .brand-logo {
+            font-size: 28px;
+        }
+
+        .brand-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-link {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .btn-text {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .btn-text:hover {
+            color: white;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.2s, transform 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--card-border);
+            color: var(--gold);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 14px;
+            background: rgba(255, 215, 0, 0.02);
+            transition: background 0.2s, border-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 215, 0, 0.08);
+            border-color: var(--gold);
+        }
+
+        /* ── Hero Section ── */
+        .hero-section {
+            padding: 60px 0 100px 0;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        @media (min-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1.1fr 0.9fr;
+            }
+        }
+
+        .hero-text-content {
+            text-align: center;
+        }
+
+        @media (min-width: 992px) {
+            .hero-text-content {
+                text-align: left;
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            color: var(--gold);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: white;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 576px) {
+            .hero-title {
+                font-size: 48px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .hero-title {
+                font-size: 56px;
+            }
+        }
+
+        .hero-title span {
+            color: var(--gold);
+        }
+
+        .hero-description {
+            color: var(--text-dim);
+            font-size: 16px;
+            max-width: 540px;
+            margin: 0 auto 32px auto;
+        }
+
+        @media (min-width: 992px) {
+            .hero-description {
+                margin: 0 0 36px 0;
+                font-size: 18px;
+            }
+        }
+
+        .hero-ctas {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        @media (min-width: 576px) {
+            .hero-ctas {
+                flex-direction: row;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .hero-ctas {
+                justify-content: flex-start;
+            }
+        }
+
+        /* ── Hero Mockup Preview Card ── */
+        .preview-wrapper {
+            position: relative;
+        }
+
+        .preview-card {
+            background: rgba(15, 15, 15, 0.85);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+        }
+
+        .mock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 14px;
+            margin-bottom: 18px;
+        }
+
+        .mock-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .mock-pills {
+            display: flex;
+            gap: 6px;
+        }
+
+        .mock-pill {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .mock-pill-active {
+            background: var(--gold);
+        }
+
+        .mock-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .mock-stat-box {
+            background: #0f0f0f;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        .mock-stat-box h4 {
+            font-size: 10px;
+            color: #888;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .mock-stat-box p {
+            font-size: 14px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .mock-budget {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 16px;
+        }
+
+        .mock-budget-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+        }
+
+        .mock-progress-bar {
+            height: 6px;
+            background: #222;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .mock-progress-fill {
+            height: 100%;
+            background: var(--gold);
+            width: 72%;
+        }
+
+        .mock-transactions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .mock-tx-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.01);
+            border-radius: 8px;
+            border-left: 3px solid var(--emerald);
+            font-size: 12px;
+        }
+
+        .mock-tx-row.expense {
+            border-left-color: var(--rose);
+        }
+
+        .mock-tx-info div {
+            font-weight: 600;
+            color: white;
+        }
+
+        .mock-tx-info span {
+            color: #666;
+            font-size: 10px;
+        }
+
+        .mock-tx-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+        }
+
+        /* ── Features Section ── */
+        .features-section {
+            padding: 80px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 50px auto;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            color: var(--text-dim);
+            font-size: 15px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .feature-card {
+            background: rgba(15, 15, 15, 0.6);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 32px 24px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        .feature-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background: rgba(255, 215, 0, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .feature-desc {
+            color: var(--text-dim);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* ── CTA Banner Section ── */
+        .cta-banner {
+            padding: 80px 0;
+        }
+
+        .cta-box {
+            background: linear-gradient(145deg, #111, #070707);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 48px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .cta-desc {
+            color: var(--text-dim);
+            font-size: 16px;
+            max-width: 580px;
+            margin: 0 auto 32px auto;
+        }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(5, 5, 5, 0.8);
+            padding: 40px 0;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .footer-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .footer-wrapper {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+        }
+
+        .footer-logo {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="brand">
+                <span class="brand-logo">💰</span>
+                <span class="brand-name">FinancePro</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#preview" class="nav-link">Platform Preview</a>
+                <a href="signup.html" class="nav-link">Create Account</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="login.html" class="btn-text">Sign In</a>
+                <a href="signup.html" class="btn-gold">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Content -->
+    <section class="hero-section">
+        <div class="container hero-grid">
+            
+            <!-- Left Column: Copywriting -->
+            <div class="hero-text-content">
+                <div class="hero-badge">
+                    <span class="mock-pill-active" style="width: 6px; height: 6px; border-radius: 50%; display: inline-block;"></span>
+                    Personal Finance Management
+                </div>
+                <h1 class="hero-title">Take absolute control of your <span>wealth.</span></h1>
+                <p class="hero-description">
+                    A self-hosted ledger architecture built to log monthly transaction streams, design category envelopes, and construct structural analytics reports.
+                </p>
+                <div class="hero-ctas">
+                    <a href="signup.html" class="btn-gold">
+                        Create Your Workspace <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                    </a>
+                    <a href="login.html" class="btn-outline">
+                        Enter System <i data-lucide="key-round" style="width:16px;height:16px;"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive CSS mock preview -->
+            <div class="preview-wrapper" id="preview">
+                <div class="preview-card">
+                    <div class="mock-header">
+                        <span class="mock-title">⚡ active_overview_layer</span>
+                        <div class="mock-pills">
+                            <div class="mock-pill"></div>
+                            <div class="mock-pill"></div>
+                            <div class="mock-pill mock-pill-active"></div>
+                        </div>
+                    </div>
+
+                    <!-- Stat Metric Cards -->
+                    <div class="mock-stats">
+                        <div class="mock-stat-box">
+                            <h4>Income</h4>
+                            <p style="color: var(--emerald);">RS. 14,200</p>
+                        </div>
+                        <div class="mock-stat-box">
+                            <h4>Expenses</h4>
+                            <p style="color: var(--rose);">RS. 4,812</p>
+                        </div>
+                        <div class="mock-stat-box">
+                            <h4>Balance</h4>
+                            <p style="color: var(--gold);">RS. 9,388</p>
+                        </div>
+                    </div>
+
+                    <!-- Target Envelope limit mock tracker -->
+                    <div class="mock-budget">
+                        <div class="mock-budget-header">
+                            <span>Groceries Threshold Status</span>
+                            <span style="color: var(--gold); font-weight: 700;">72% Allocation reached</span>
+                        </div>
+                        <div class="mock-progress-bar">
+                            <div class="mock-progress-fill"></div>
+                        </div>
+                    </div>
+
+                    <!-- Simulated dynamic logs -->
+                    <div class="mock-transactions-list">
+                        <div class="mock-tx-row">
+                            <div class="mock-tx-info">
+                                <div>Monthly Salary Contract</div>
+                                <span>Income • Payroll</span>
+                            </div>
+                            <span class="mock-tx-value" style="color: var(--emerald);">+RS. 14,200.00</span>
+                        </div>
+                        <div class="mock-tx-row expense">
+                            <div class="mock-tx-info">
+                                <div>Broadband ISP Access</div>
+                                <span>Expense • Utilities</span>
+                            </div>
+                            <span class="mock-tx-value" style="color: var(--rose);">-RS. 120.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Features Overview -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Engineered to scale. Built to verify.</h2>
+                <p class="section-subtitle">Take advantage of a localized database approach optimized with Express, Node.js, and MySQL frameworks.</p>
+            </div>
+
+            <div class="features-grid">
+                <!-- Card 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i data-lucide="shield-check" style="width:22px;height:22px;"></i>
+                    </div>
+                    <h3 class="feature-title">Verified Identity</h3>
+                    <p class="feature-desc">Complete client-side input validation integrated with server-side queries to prevent duplication across records.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i data-lucide="sliders" style="width:22px;height:22px;"></i>
+                    </div>
+                    <h3 class="feature-title">Envelope Controls</h3>
+                    <p class="feature-desc">Set strict limit thresholds for individual category scopes to warn yourself before exceeding allocation caps.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i data-lucide="file-spreadsheet" style="width:22px;height:22px;"></i>
+                    </div>
+                    <h3 class="feature-title">Multi-Format Exports</h3>
+                    <p class="feature-desc">Compile your general financial registers into styled structural Spreadsheets, PDF invoices, or MS Word reports.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Banner -->
+    <section class="cta-banner">
+        <div class="container">
+            <div class="cta-box">
+                <h2 class="cta-title">Ready to optimize your accounting ledger?</h2>
+                <p class="cta-desc">Launch FinancePro locally, link with your custom database instance on Port 3002, and organize your wealth.</p>
+                <a href="signup.html" class="btn-gold">Create Free Workspace <i data-lucide="sparkles" style="width:16px;height:16px;"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-wrapper">
+            <div>
+                <a href="#" class="footer-logo">💰 FinancePro</a>
+                <p style="margin-top: 8px;">Active self-hosted core server link: Port 3002</p>
+            </div>
+            <div class="footer-links">
+                <a href="login.html">Sign In</a>
+                <a href="signup.html">Create Workspace</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

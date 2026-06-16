@@ -3,8 +3,8 @@ const mysql = require("mysql2");
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "----", 
-    database: "-----",
+    password: "SQLmzs2006", 
+    database: "finance_db",
     // Adding this ensures decimals (like amounts) are treated as numbers, not strings
     decimalNumbers: true 
 });
