@@ -51,7 +51,7 @@ The database consists of three core relational tables and three custom analytics
 - **`view_monthly_comparison`**: Compares monthly cumulative income vs. expense totals.
 - **`view_category_distribution`**: Computes category-wise cumulative expenditure percentages.
 
----
+--
 ```bash
 git clone <your-repository-url>
 cd Personal-Finance-Manager
